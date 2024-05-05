@@ -118,25 +118,27 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public int cantidadArcos() {
 		int cantidadArcos = 0;
 		// Recorro todos los vertices del grafo
-		for (int verticeId : vertices.keySet()) {
-			// Sumo la cantidad de arcos del vertice verticeId
-			// vertices.get(verticeId) me devuelve la lista de arcos del vertice verticeId y
-			// con size() obtengo la cantidad de arcos de la lista
-			cantidadArcos += vertices.get(verticeId).size();
+		for (int v : vertices.keySet()) {
+			// Sumo la cantidad de arcos del vertice v
+			cantidadArcos += vertices.get(v).size();
 		}
 		return cantidadArcos;
 	}
+	// vertices.get(v) me devuelve la lista de arcos del vertice v y
+	// con size() obtengo la cantidad de arcos de la lista
 
 	@Override
 	public Iterator<Integer> obtenerVertices() {
-		// TODO Auto-generated method stub
-		return null;
+		// metodo .keySet() de HashMap que devuelve un Set con las claves del HashMap
+		return vertices.keySet().iterator();
+		// resultados que devuelve: vertices.keySet().iterator() = [verticeId1,
+		// verticeId2, verticeId3, ...]
+
 	}
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IteradorAdyacentes<T>(this.vertices, verticeId);
 	}
 
 	@Override
@@ -147,8 +149,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		return new InteradorArco<T>(this.vertices, verticeId);
 	}
 
 }
