@@ -28,4 +28,8 @@ public class IteradorAdyacentes<T> implements Iterator<Integer> {
         vertices.get(v).remove(arco);
         return verticeTmp;
     }
+
+    public T getEtiqueta() {
+        return vertices.get(v).get(0).getEtiqueta();
+    }
 }

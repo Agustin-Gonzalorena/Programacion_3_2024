@@ -7,3 +7,5 @@ for (let i = 1; i <= 15000; i++) {
   };\n`;
 }
 fs.writeFileSync("tpe/datasets/TareasExtended.csv", data);
+
+array.forEach((element) => {});

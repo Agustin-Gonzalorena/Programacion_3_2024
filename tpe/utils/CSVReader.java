@@ -10,8 +10,12 @@ import java.util.HashMap;
 import tpe.Tarea;
 
 public class CSVReader {
+	private ArrayList<Tarea> tareasCriticas;
+	private ArrayList<Tarea> tareasNoCriticas;
 
 	public CSVReader() {
+		this.tareasCriticas = new ArrayList<Tarea>();
+		this.tareasNoCriticas = new ArrayList<Tarea>();
 	}
 
 	public HashMap<String, Tarea> readTasks(String taskPath) {
@@ -31,9 +35,31 @@ public class CSVReader {
 			// Aca instanciar lo que necesiten en base a los datos leidos
 			Tarea tarea = new Tarea(id, nombre, tiempo, critica, prioridad);
 			tareas.put(id, tarea);
+
+			if (critica)
+				this.setTareaCritica(tarea);
+			else if (!critica)
+				this.setTareaNoCritica(tarea);
+
 		}
 		return tareas;
 
+	}
+
+	public void setTareaCritica(Tarea tarea) {
+		this.tareasCriticas.add(tarea);
+	}
+
+	public void setTareaNoCritica(Tarea tarea) {
+		this.tareasNoCriticas.add(tarea);
+	}
+
+	public ArrayList<Tarea> getTareasCriticas() {
+		return tareasCriticas;
+	}
+
+	public ArrayList<Tarea> getTareasNoCriticas() {
+		return tareasNoCriticas;
 	}
 
 	public void readProcessors(String processorPath) {

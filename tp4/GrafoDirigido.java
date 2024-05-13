@@ -138,7 +138,19 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		return new IteradorAdyacentes<T>(this.vertices, verticeId);
+		// return new IteradorAdyacentes<T>(this.vertices, verticeId);
+		/*
+		 * Ejemplo en clase
+		 * if(vertices.containsKey(verticeId)) {
+		 * ArrayList<Integer> adyacentes = new ArrayList<>();
+		 * for(Arco<T> arco : vertices.get(verticeId)) {
+		 * adyacentes.add(arco.getVerticeDestino());
+		 * }
+		 * return adyacentes.iterator();
+		 * }
+		 * return null;
+		 */
+		return new IteradorClaseAdyacente<>(vertices.get(verticeId).iterator());
 	}
 
 	@Override
@@ -150,6 +162,13 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
 		return new InteradorArco<T>(this.vertices, verticeId);
+		/*
+		 * Ejemplo en clase
+		 * if(vertices.containsKey(verticeId)) {
+		 * return vertices.get(verticeId).iterator();
+		 * }
+		 * return null;
+		 */
 	}
 
 }

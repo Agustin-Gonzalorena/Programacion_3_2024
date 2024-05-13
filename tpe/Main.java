@@ -5,9 +5,10 @@ import java.util.List;
 public class Main {
 
 	public static void main(String args[]) {
-		long startTime = System.currentTimeMillis();
 		///
-		Servicios servicios = new Servicios("./tpe/datasets/Procesadores.csv", "./tpe/datasets/Tareas.csv");
+		Servicios servicios = new Servicios("./tpe/datasets/Procesadores.csv",
+				// "./tpe/datasets/Tareas.csv");
+				"./tpe/datasets/TareasExtended.csv");
 
 		/*
 		 * for (Tarea tarea : servicios.getTareas()) {
@@ -20,12 +21,15 @@ public class Main {
 		 * System.out.println(tarea);
 		 */
 
+		long startTime = System.currentTimeMillis();// inicio tiempo
 		List<Tarea> tareasCriticas = servicios.servicio2(true);
-		for (Tarea tarea : tareasCriticas) {
-			System.out.println(tarea);
-		}
-
-		fin(startTime);
+		System.out.println("Cantidad de tareas criticas: " + tareasCriticas.size());
+		fin(startTime);// fin tiempo
+		/*
+		 * for (Tarea tarea : tareasCriticas) {
+		 * System.out.println(tarea);
+		 * }
+		 */
 
 	}
 

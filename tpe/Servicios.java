@@ -13,6 +13,8 @@ import tpe.utils.CSVReader;
  */
 public class Servicios {
 	private HashMap<String, Tarea> tareas;
+	private ArrayList<Tarea> tareasCriticas;
+	private ArrayList<Tarea> tareasNoCriticas;
 
 	/*
 	 * Expresar la complejidad temporal del constructor.
@@ -21,36 +23,18 @@ public class Servicios {
 		CSVReader reader = new CSVReader();
 		reader.readProcessors(pathProcesadores);
 		this.tareas = reader.readTasks(pathTareas);
+		this.tareasCriticas = reader.getTareasCriticas();
+		this.tareasNoCriticas = reader.getTareasNoCriticas();
 	}
 
-	// borrar metodo
-	public ArrayList<Tarea> getTareas() {
-		return new ArrayList<Tarea>(this.tareas.values());
-	}
-
-	/*
-	 * Expresar la complejidad temporal del servicio 1.
-	 */
 	public Tarea servicio1(String ID) { // O(1)
 		return this.tareas.get(ID);
 	}
 
-	/*
-	 * Expresar la complejidad temporal del servicio 2.
-	 */
-	public List<Tarea> servicio2(boolean esCritica) { // O(n)
-		List<Tarea> tareasCriticas = new ArrayList<Tarea>();
-		for (Tarea tarea : this.tareas.values()) {
-			if (tarea.isCritica() == esCritica) {
-				tareasCriticas.add(tarea);
-			}
-		}
-		return tareasCriticas;
+	public List<Tarea> servicio2(boolean esCritica) {// O(1)
+		return esCritica ? this.tareasCriticas : this.tareasNoCriticas;
 	}
 
-	/*
-	 * Expresar la complejidad temporal del servicio 3.
-	 */
 	public List<Tarea> servicio3(int prioridadInferior, int prioridadSuperior) { // O(n)
 		List<Tarea> tareas = new ArrayList<Tarea>();
 		for (Tarea tarea : this.tareas.values()) {
@@ -59,6 +43,11 @@ public class Servicios {
 			}
 		}
 		return tareas;
+	}
+
+	// borrar metodo
+	public ArrayList<Tarea> getTareas() {
+		return new ArrayList<Tarea>(this.tareas.values());
 	}
 
 }
